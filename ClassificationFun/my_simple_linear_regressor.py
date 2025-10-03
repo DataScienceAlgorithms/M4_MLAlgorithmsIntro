@@ -76,7 +76,8 @@ class MySimpleLinearRegressor:
         
         return [float(self.slope * x[0] + self.intercept) for x in X_test]
 
-    @staticmethod
+    @staticmethod # decorator to denote this is a static (class-level) method
+   
     def _compute_slope_intercept(x, y):
         """
         Compute slope (m) and intercept (b) using least squares.
