@@ -9,7 +9,7 @@ class MyLinearRegressionGD:
     """
     A linear regression model that fits a line to data with two features
     using gradient descent optimization.
-
+    
     Equation:
         y = slope_1 * x_1 + slope_2 * x_2 + intercept
 
