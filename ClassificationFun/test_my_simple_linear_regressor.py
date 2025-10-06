@@ -11,7 +11,7 @@ def test_mysimplelinearregressor_fit():
     # use assert statements to form test cases
     # start with simple/common test cases
     # then move on to complex/edge test cases
-
+    
     # test cases for fit()
     np.random.seed(0)
     X_train = [[val] for val in list(range(0, 100))]

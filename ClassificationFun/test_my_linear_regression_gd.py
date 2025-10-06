@@ -10,7 +10,7 @@ def test_mylinearregression_gd_fit():
     # Fit sklearn model as baseline
     sklearn_model = SGDRegressor(max_iter=1000, eta0=0.0001, random_state=0)
     sklearn_model.fit(X_train, y_train)
-
+    
     my_model=MyLinearRegressionGD(iterations=1000,learning_rate=0.0001)
     my_model.fit(X_train,y_train)
    
