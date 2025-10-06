@@ -1,4 +1,7 @@
 from my_simple_linear_regressor import MySimpleLinearRegressor
+from my_linear_regression_gd import MyLinearRegressionGD
+
+
 import numpy as np
 def main():
     # Starting with PA4, we will implement common ML algorithms
@@ -33,10 +36,26 @@ def main():
     y_train = [row[0] * 2 + np.random.normal(0, 25) for row in X_train]
     my_lin=MySimpleLinearRegressor()
     my_lin.fit(X_train,y_train)
-
+      
     y_pred=my_lin.predict([[200],[300]])
-
     print(y_pred)
+
+
+    # Generate synthetic training data with two features 
+    X_train = [[x, 100 - x] for x in range(100)]
+    y_train = [3 * row[0] + 5 * row[1] + np.random.normal(0, 10) for row in X_train]
+    print("X_train:", X_train[:5])
+    print("y_train:", y_train[:5])
+
+    mylin=MyLinearRegressionGD()
+    mylin.fit(X_train,y_train)
+    print(mylin.slopes)
+    print(mylin.intercept)
+    y_pred= mylin.predict([[4,50]])
+    print(y_pred)
+
+
+
 
   
 

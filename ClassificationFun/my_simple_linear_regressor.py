@@ -57,6 +57,8 @@ class MySimpleLinearRegressor:
 
         # Flatten 2D input to 1D
         x_values = [x[0] for x in X_train]
+        if len(X_train) !=len(y_train):
+            raise ValueError("X and y must have same length")
         self.slope, self.intercept = self._compute_slope_intercept(x_values, y_train)
 
     def predict(self, X_test):
