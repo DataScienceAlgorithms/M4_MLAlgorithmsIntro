@@ -89,7 +89,7 @@ class MySimpleLinearRegressor:
             x (list of numeric vals): Feature values (1D list).
             y (list of numeric vals): Target values (1D list).
         
-        Returns:
+        Returns: 
             tuple:
                 m (float): Slope of the line.
                 b (float): Intercept of the line.

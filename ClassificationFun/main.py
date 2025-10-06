@@ -19,6 +19,7 @@ def main():
     # 3. Evaluate the model using the testing set (X_test, y_test)
     # Note: X_train aligns with y_train, X_test aligns with y_test
 
+
     # Each algorithm is implemented as a class with two main methods:
     # - fit(X_train, y_train): trains the model on the training data
     # - predict(X_test): returns predictions (y_pred) for the test data
