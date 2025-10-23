@@ -18,6 +18,17 @@ def test_compute_euclidean_distance():
 def compute_euclidean_distance(v1,v2):
     return np.sqrt(sum([(a-b)**2 for a,b in zip(v1,v2)]))
 
+
+# Note: this function will be super handy for PA5
+def randomize_in_place(alist, parallel_list=None):
+    for i in range(len(alist)):
+        # generate a random index to swap this value at i with
+        rand_index = np.random.randint(0, len(alist)) # rand int in [0, len(alist))
+        # do the swap
+        alist[i], alist[rand_index] = alist[rand_index], alist[i]
+        if parallel_list is not None:
+            parallel_list[i], parallel_list[rand_index] = parallel_list[rand_index], parallel_list[i]
+
 def main():
     # Starting with PA4, we will implement common ML algorithms
     # following the style of popular libraries (like scikit-learn or TensorFlow,etc.) API
@@ -50,21 +61,20 @@ def main():
     np.random.seed(0)
     X_train = [[val] for val in list(range(0, 100))]
     y_train = [row[0] * 2 + np.random.normal(0, 25) for row in X_train]
+    
     my_lin=MySimpleLinearRegressor()
     my_lin.fit(X_train,y_train)
       
-    y_pred=my_lin.predict([[200],[300]])
+    y_pred=my_lin.predict([[8]])
     print(y_pred)
 
 
-    # Generate synthetic training data with two features 
-  #  X_train = [[x, 100 - x] for x in range(100)]
-   # y_train = [3 * row[0] + 5 * row[1] + np.random.normal(0, 10) for row in X_train]
     np.random.seed(0)
     X_train = np.random.rand(100, 2) * 100   # Two independent features
     y_train = 2 * X_train[:, 0] + 5 * X_train[:, 1] + np.random.normal(0, 10, 100)
     print("X_train:", X_train[:5])
     print("y_train:", y_train[:5])
+
 
     mylin=MyLinearRegressionGD()
     mylin.fit(X_train,y_train)
@@ -72,7 +82,9 @@ def main():
     print(mylin.intercept)
     y_pred= mylin.predict([[4,50]])
     print(y_pred)
-   
+
+
+ 
 
     # PA4 kNN starter code
     header = ["att1", "att2"]
@@ -98,16 +110,21 @@ def main():
     for i,row in enumerate(X_train):
         dist=compute_euclidean_distance(row,unseen_instance)
         row_dist.append((i,dist))
-    #print(row_dist)
     
     #sort the list of (index, distance) pairs by distance value (second element)
     row_dist.sort(key=operator.itemgetter(1))
     top_k= row_dist[:k]
     print(top_k)
     
-    # TODO: extract the top k closes neighbors' y labels from y_train
+    # top k closes neighbors' y labels from y_train
     # then use majority voting to find the prediction for this test instance
     # can make use of get_frequencies()
+    y_labels=[y_train[i] for i,_ in top_k]
+    freq={}
+    for i in y_labels:
+        freq[i]=freq.get(i,0)+1
+    y_pred=max(freq,key=freq.get)
+    print(y_pred)
    
     
 
@@ -118,5 +135,14 @@ def main():
     print(distances)
     print(indexes)
 
+    np.random.seed(0)
+    print("randomizing in place")
+    randomize_in_place(X_train, y_train)
+    for i in range(len(X_train)):
+        # check they are still parallel
+        print(X_train[i], y_train[i])
+
+
+    
 if __name__=='__main__':
     main()
